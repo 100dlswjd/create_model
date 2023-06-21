@@ -19,8 +19,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.pushButton_add_class.clicked.connect(self.btn_add_class_tab_handler)
         self.lineEdit_class_name.returnPressed.connect(self.btn_add_class_tab_handler)
+        self.pushButton_delete_class.clicked.connect(self.btn_delete_class_tab_handler)
     
-    def btn_add_class_tab_handler(self):
+    def btn_add_class_tab_handler(self) -> bool:
         if not self.lineEdit_class_name.text():
             return False
         name = self.lineEdit_class_name.text()
@@ -28,6 +29,12 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.lineEdit_class_name.setText("")
         return True
 
+    def btn_delete_class_tab_handler(self) -> bool:
+        if self.tabWidget.count() == 0:
+            return False
+        
+        self.tabWidget.removeTab(self.tabWidget.currentIndex())
+        return True
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
