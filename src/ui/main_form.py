@@ -68,6 +68,12 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addLayout(self.horizontalLayout_2)
 
+        self.pushButton_make = QPushButton(self.centralwidget)
+        self.pushButton_make.setObjectName(u"pushButton_make")
+        self.pushButton_make.setEnabled(False)
+
+        self.verticalLayout.addWidget(self.pushButton_make)
+
 
         self.horizontalLayout_3.addLayout(self.verticalLayout)
 
@@ -90,5 +96,6 @@ class Ui_MainWindow(object):
         self.label_class_name.setText(QCoreApplication.translate("MainWindow", u"\ud074\ub798\uc2a4 \uc774\ub984", None))
         self.pushButton_add_class.setText(QCoreApplication.translate("MainWindow", u"\ud074\ub798\uc2a4 \ucd94\uac00", None))
         self.pushButton_delete_class.setText(QCoreApplication.translate("MainWindow", u"\ud074\ub799\uc2a4 \uc0ad\uc81c", None))
+        self.pushButton_make.setText(QCoreApplication.translate("MainWindow", u"\ub9cc\ub4e4\uae30", None))
     # retranslateUi
 
