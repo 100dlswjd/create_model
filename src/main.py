@@ -3,22 +3,35 @@ import sys
 import shutil
 import random
 
-from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
-from PySide6.QtCore import Signal, Slot
+from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog, QWidget
+from PySide6.QtCore import Signal, Slot, QObject
 
 from ui.main_form import Ui_MainWindow
 from ui.class_tab_form import Ui_class_tab
+from ui.complete_form import Ui_Complete
 
 from threading import Thread
 
 import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 
-import tensorflow as tf
-from tensorflow.keras.optimizers import RMSprop
-from tensorflow.keras.preprocessing.image import ImageDataGenerator
+class CompleteSignal(QObject):
+    complete = Signal(bool)
 
-class ClassTab(QMainWindow, Ui_class_tab):
+class CompleteWidget(QWidget, Ui_Complete):
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
+        self.pushButton_acept.clicked.connect(self.btn_acept_handler)
+
+    def set_text(self, text : str):
+        self.label_complete.setText(text)
+    
+    @Slot()
+    def btn_acept_handler(self):
+        self.close()
+
+class ClassTab(QWidget, Ui_class_tab):
     def __init__(self, class_name : str):
         super().__init__()
         self.setupUi(self)
@@ -38,10 +51,14 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         super().__init__()
         self.setupUi(self)
         self.tab_list = list()
+        self.complete_signal = CompleteSignal()
+        self.complete_widget = CompleteWidget()
+
         self.pushButton_add_class.clicked.connect(self.btn_add_class_tab_handler)
         self.lineEdit_class_name.returnPressed.connect(self.btn_add_class_tab_handler)
         self.pushButton_delete_class.clicked.connect(self.btn_delete_class_tab_handler)
         self.pushButton_make.clicked.connect(self.btn_make_handler)
+        self.complete_signal.complete.connect(self.complete_handler)
     
     @Slot()
     def btn_add_class_tab_handler(self) -> bool:
@@ -63,9 +80,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         index = self.tabWidget.currentIndex()
         del self.tab_list[index]
         self.tabWidget.removeTab(index)
+        if self.tabWidget.count() == 0:
+            self.pushButton_make.setEnabled(False)
         return True
     
-    def work_thread(self, class_dir_list : list):
+    def work_thread(self, class_dir_list : list, complete_signal : CompleteSignal):
         def mkdir(path : str) -> bool:
             if not os.path.isdir(path):
                 os.mkdir(path)
@@ -142,7 +161,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             model.save(model_name)
 
-
         train_dir = "train"
         validation_dir = "validation"
         test_dir = "test"
@@ -180,12 +198,24 @@ class MainWindow(QMainWindow, Ui_MainWindow):
             for class_name in class_name_list:
                 f.write(str(index) + " " + class_name + "\n")
                 index += 1
+            f.close()
         
+        complete_signal.complete.emit(True)
 
     @Slot()
     def btn_make_handler(self):
-        work_thread = Thread(target=self.work_thread, args=(self.tab_list,))
+        work_thread = Thread(target=self.work_thread, args=(self.tab_list, self.complete_signal))
         work_thread.start()
+        self.pushButton_make.setText("모델생성중")
+        self.pushButton_make.setEnabled(False)
+    
+    @Slot(bool)
+    def complete_handler(self, is_complete : bool):
+        if is_complete:
+            self.complete_widget.set_text("모델생성이 완료 되었습니다.")
+            self.complete_widget.show()
+            self.pushButton_make.setText("모델생성")
+            self.pushButton_make.setEnabled(True)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
