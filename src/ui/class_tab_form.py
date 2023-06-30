@@ -25,16 +25,15 @@ class Ui_class_tab(object):
             class_tab.setObjectName(u"class_tab")
         class_tab.resize(331, 126)
         class_tab.setMinimumSize(QSize(331, 126))
-        self.verticalLayoutWidget = QWidget(class_tab)
-        self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
-        self.verticalLayoutWidget.setGeometry(QRect(9, 9, 313, 108))
-        self.verticalLayout = QVBoxLayout(self.verticalLayoutWidget)
+        self.horizontalLayout_4 = QHBoxLayout(class_tab)
+        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
+        self.verticalLayout = QVBoxLayout()
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(6, 6, 6, 6)
         self.horizontalLayout_3 = QHBoxLayout()
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
         self.horizontalLayout_3.setContentsMargins(4, 4, 4, 4)
-        self.label_class_name = QLabel(self.verticalLayoutWidget)
+        self.label_class_name = QLabel(class_tab)
         self.label_class_name.setObjectName(u"label_class_name")
 
         self.horizontalLayout_3.addWidget(self.label_class_name)
@@ -49,18 +48,18 @@ class Ui_class_tab(object):
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout.setContentsMargins(4, 4, 4, 4)
-        self.label_dir_path = QLabel(self.verticalLayoutWidget)
+        self.label_dir_path = QLabel(class_tab)
         self.label_dir_path.setObjectName(u"label_dir_path")
 
         self.horizontalLayout.addWidget(self.label_dir_path)
 
-        self.lineEdit_select_folder_path = QLineEdit(self.verticalLayoutWidget)
+        self.lineEdit_select_folder_path = QLineEdit(class_tab)
         self.lineEdit_select_folder_path.setObjectName(u"lineEdit_select_folder_path")
         self.lineEdit_select_folder_path.setEnabled(False)
 
         self.horizontalLayout.addWidget(self.lineEdit_select_folder_path)
 
-        self.pushButton_select_folder = QPushButton(self.verticalLayoutWidget)
+        self.pushButton_select_folder = QPushButton(class_tab)
         self.pushButton_select_folder.setObjectName(u"pushButton_select_folder")
 
         self.horizontalLayout.addWidget(self.pushButton_select_folder)
@@ -71,13 +70,16 @@ class Ui_class_tab(object):
         self.horizontalLayout_2 = QHBoxLayout()
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.horizontalLayout_2.setContentsMargins(4, 4, 4, 4)
-        self.label = QLabel(self.verticalLayoutWidget)
+        self.label = QLabel(class_tab)
         self.label.setObjectName(u"label")
 
         self.horizontalLayout_2.addWidget(self.label)
 
 
         self.verticalLayout.addLayout(self.horizontalLayout_2)
+
+
+        self.horizontalLayout_4.addLayout(self.verticalLayout)
 
 
         self.retranslateUi(class_tab)
