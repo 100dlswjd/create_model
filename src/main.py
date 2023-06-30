@@ -1,6 +1,7 @@
 import os
 import sys
 import shutil
+import random
 
 from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
 from PySide6.QtCore import Signal, Slot
@@ -166,13 +167,15 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         for class_dir in class_dir_list:
             class_dir : ClassTab = class_dir
             for file in os.listdir(class_dir.dir_path):
-                shutil.copy(os.path.join(class_dir.dir_path, file), os.path.join(train_dir, class_dir.class_name))
-                shutil.copy(os.path.join(class_dir.dir_path, file), os.path.join(validation_dir, class_dir.class_name))
+                if random.random() < 0.7:
+                    shutil.copy(os.path.join(class_dir.dir_path, file), os.path.join(train_dir, class_dir.class_name))
+                else:
+                    shutil.copy(os.path.join(class_dir.dir_path, file), os.path.join(validation_dir, class_dir.class_name))
 
         # 모델 생성
         create_model(train_dir, validation_dir, test_dir)
 
-        with open("label.txt", "w") as f:
+        with open("label.txt", "w", encoding='utf-8') as f:
             index = 0
             for class_name in class_name_list:
                 f.write(str(index) + " " + class_name + "\n")
