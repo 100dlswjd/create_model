@@ -1,7 +1,0 @@
-pyside6
-matplotlib
-tensorflow
-opencv-python
-numpy
-scikit-learn
-pandas
