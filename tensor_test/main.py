@@ -1,7 +1,7 @@
 import sys
 
 from ui.main_form import Ui_MainWindow
-from PySide6.QtWidgets import QApplication, QMainWindow
+from PySide6.QtWidgets import QApplication, QMainWindow, QFileDialog
 
 class MainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -15,7 +15,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         pass
 
     def btn_select_csv_file_path_handler(self):
-        pass
+        file_path = QFileDialog.getOpenFileName(self, "Select CSV File", "", "CSV Files (*.csv)")
+        if file_path:            
+            self.label_file_path.setText(file_path[0])
+            self.pushButton_model_create.setEnabled(True)
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
