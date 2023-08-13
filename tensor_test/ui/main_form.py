@@ -23,7 +23,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(349, 179)
+        MainWindow.resize(305, 209)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.horizontalLayout_4 = QHBoxLayout(self.centralwidget)
@@ -51,11 +51,11 @@ class Ui_MainWindow(object):
         self.horizontalLayout_2 = QHBoxLayout()
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.horizontalLayout_2.setContentsMargins(4, 4, 4, 4)
-        self.label = QLabel(self.centralwidget)
-        self.label.setObjectName(u"label")
-        self.label.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+        self.label_target = QLabel(self.centralwidget)
+        self.label_target.setObjectName(u"label_target")
+        self.label_target.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
 
-        self.horizontalLayout_2.addWidget(self.label)
+        self.horizontalLayout_2.addWidget(self.label_target)
 
         self.comboBox = QComboBox(self.centralwidget)
         self.comboBox.setObjectName(u"comboBox")
@@ -65,6 +65,22 @@ class Ui_MainWindow(object):
 
 
         self.verticalLayout.addLayout(self.horizontalLayout_2)
+
+        self.horizontalLayout_5 = QHBoxLayout()
+        self.horizontalLayout_5.setObjectName(u"horizontalLayout_5")
+        self.horizontalLayout_5.setContentsMargins(4, 4, 4, 4)
+        self.label_columns = QLabel(self.centralwidget)
+        self.label_columns.setObjectName(u"label_columns")
+
+        self.horizontalLayout_5.addWidget(self.label_columns)
+
+        self.label_colum_list = QLabel(self.centralwidget)
+        self.label_colum_list.setObjectName(u"label_colum_list")
+
+        self.horizontalLayout_5.addWidget(self.label_colum_list)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout_5)
 
         self.horizontalLayout_3 = QHBoxLayout()
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
@@ -84,7 +100,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 349, 22))
+        self.menubar.setGeometry(QRect(0, 0, 305, 22))
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
@@ -96,10 +112,12 @@ class Ui_MainWindow(object):
     # setupUi
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
+        MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"\ubaa8\ub378 \uc0c8\uc131", None))
         self.label_file_path.setText(QCoreApplication.translate("MainWindow", u"\ud30c\uc77c", None))
         self.pushButton_select_csv_file_path.setText(QCoreApplication.translate("MainWindow", u"csv \ud30c\uc77c \uc120\ud0dd", None))
-        self.label.setText(QCoreApplication.translate("MainWindow", u"\ud0c0\uac9f", None))
+        self.label_target.setText(QCoreApplication.translate("MainWindow", u"\ud0c0\uac9f", None))
+        self.label_columns.setText(QCoreApplication.translate("MainWindow", u"columns : ", None))
+        self.label_colum_list.setText("")
         self.pushButton_model_create.setText(QCoreApplication.translate("MainWindow", u"model_create", None))
     # retranslateUi
 
