@@ -25,8 +25,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             data = pd.read_csv(file_path)
             columns = data.columns
+            columns = list(columns)
+            self.comboBox.clear()
             for idx in columns:
                 self.comboBox.addItem(idx)
+            self.label_colum_list.setText(str(columns))
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
