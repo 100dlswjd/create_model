@@ -23,7 +23,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(305, 209)
+        MainWindow.resize(414, 247)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.horizontalLayout_4 = QHBoxLayout(self.centralwidget)
@@ -82,6 +82,23 @@ class Ui_MainWindow(object):
 
         self.verticalLayout.addLayout(self.horizontalLayout_5)
 
+        self.horizontalLayout_6 = QHBoxLayout()
+        self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
+        self.horizontalLayout_6.setContentsMargins(4, 4, 4, 4)
+        self.label_save_path = QLabel(self.centralwidget)
+        self.label_save_path.setObjectName(u"label_save_path")
+
+        self.horizontalLayout_6.addWidget(self.label_save_path)
+
+        self.pushButton_save_path = QPushButton(self.centralwidget)
+        self.pushButton_save_path.setObjectName(u"pushButton_save_path")
+        self.pushButton_save_path.setEnabled(False)
+
+        self.horizontalLayout_6.addWidget(self.pushButton_save_path)
+
+
+        self.verticalLayout.addLayout(self.horizontalLayout_6)
+
         self.horizontalLayout_3 = QHBoxLayout()
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
         self.horizontalLayout_3.setContentsMargins(4, 4, 4, 4)
@@ -100,7 +117,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 305, 22))
+        self.menubar.setGeometry(QRect(0, 0, 414, 22))
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
@@ -118,6 +135,8 @@ class Ui_MainWindow(object):
         self.label_target.setText(QCoreApplication.translate("MainWindow", u"\ud0c0\uac9f", None))
         self.label_columns.setText(QCoreApplication.translate("MainWindow", u"columns : ", None))
         self.label_colum_list.setText("")
+        self.label_save_path.setText(QCoreApplication.translate("MainWindow", u"\uc800\uc7a5\uc704\uce58", None))
+        self.pushButton_save_path.setText(QCoreApplication.translate("MainWindow", u"\ucc3e\uae30", None))
         self.pushButton_model_create.setText(QCoreApplication.translate("MainWindow", u"model_create", None))
     # retranslateUi
 
