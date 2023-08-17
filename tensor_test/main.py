@@ -39,6 +39,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def btn_model_create_handler(self):
         import pandas as pd
         import tensorflow as tf
+        self.pushButton_model_create.setEnabled(False)
+        self.pushButton_model_create.setText("모델 생성 중")
         df = pd.read_csv(self.csv_file_path)
 
         target = df[self.comboBox.currentText()]
@@ -57,26 +59,28 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         # 모델 학습 및 저장
         model.fit(feature, target, epochs=1000, verbose=0)
-        model.save('model.h5')
-
+        model.save(self.save_file_path)        
+        self.pushButton_model_create.setText("모델 생성 완료")
 
     def btn_select_csv_file_path_handler(self):
         file_path = QFileDialog.getOpenFileName(self, "Select CSV File", "", "CSV Files (*.csv)")
-        if file_path:
+        if file_path[0]:
+            self.comboBox.clear()
             file_path = file_path[0]
             self.label_file_path.setText(file_path)
             self.csv_file_path = file_path
 
-            self.pushButton_model_create.setEnabled(True)
             self.comboBox.setEnabled(True)
             self.pushButton_save_path.setEnabled(True)
 
             data = pd.read_csv(file_path)
             self.columns = data.columns
             self.columns = list(self.columns)
-            self.comboBox.clear()
+            
             for idx in self.columns:
                 self.comboBox.addItem(idx)
+        else:
+            pass
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
